@@ -5,11 +5,11 @@
 ## refer to GP
 
 class Player:
-    def __init__(self, name, current_room, items, in_treasure=False):
+    def __init__(self, name, current_room, in_treasure=False):
         self.name = name
         self.current_room = current_room
         self.in_treasure = in_treasure
-        self.items = items
+        
 
 
     def __str__(self):
