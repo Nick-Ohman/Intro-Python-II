@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+# from items import Item
 
 # Declare all the rooms
 
@@ -34,6 +35,16 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+
+
+## create items
+
+# items = {
+#     "food": Item("Sherbet Lemon", "You might need food if you get lost"),
+#     "water": Item("Water", "You might be thirsty with all this walking"),
+#     "Light": Item("Light of Eärendil's star", "May it be a light to you in dark places, when all other lights go out."),
+#     "Sword": Item("sword of gondor")
+# }
 
 #
 # Main
@@ -85,8 +96,8 @@ def start_game():
                 if player.current_room.name == "Treasure Chamber":
                     print(f' You are now in {player.current_room.name}, {player.current_room.description}')
                     print('You have found the treasure')
-                    won_game = input('Would you like to play again? Type y for yes, n for no')
-                    if won_game == 'y':
+                    won_game = input('Would you like to play again? Type y for yes, n for no...   ')
+                    if won_game == 'w':
                         start_game()
                     else:
                         print('\n     !! Thanks for playing !!\n')
