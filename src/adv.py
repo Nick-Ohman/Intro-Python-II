@@ -1,6 +1,7 @@
 from room import Room
 from player import Player
-# from items import Item
+from items import Item
+
 
 # Declare all the rooms
 
@@ -39,13 +40,18 @@ room['treasure'].s_to = room['narrow']
 
 ## create items
 
-# items = {
-#     "food": Item("Sherbet Lemon", "You might need food if you get lost"),
-#     "water": Item("Water", "You might be thirsty with all this walking"),
-#     "Light": Item("Light of Eärendil's star", "May it be a light to you in dark places, when all other lights go out."),
-#     "Sword": Item("sword of gondor")
-# }
-
+items = {
+    "food": Item("Sherbet Lemon", "You might need food if you get lost"),
+    "water": Item("Water", "You might be thirsty with all this walking"),
+    "Light": Item("Light of Eärendil's star", "May it be a light to you in dark places, when all other lights go out."),
+    "Sword": Item("sword of gondor", "Protection for yourself"),
+    "goldpiece": Item("Gold Piece", "Found your first piece"),
+    "helmate": Item("Chest Armour", "Protection")
+}
+room["foyer"].items = [items["goldpiece"], items["Light"]]
+room["overlook"].items = [items["Sword"], items["food"]]
+room["narrow"].items = [items["water"]]
+room["treasure"].items = [items["water"]]
 #
 # Main
 #
@@ -74,10 +80,22 @@ needhelp = ''' \n   How to play: \n\n, Type \'n\' to move north\n, Type \'s\' to
 
 
 def start_game():
-    player = Player(name = input('Enter name to start  '), current_room = room['outside'])
+    player = Player(name = input('Enter name to start  '), current_room = room['outside'], items = [items["helmet"]])
     
     print(player)
 
+
+    def grabdrop():
+        choice = input(f'This room has:     {player.current_room.printitems()} \n         ')
+        print(choice)
+        if choice == 'ok':
+            pass
+        elif choice == 'get':
+            player.getItem(f'{choice[5:]}')
+        elif choice == 'drop':
+            player.dropItem(f'{choice[6:]}')
+        else:
+            pass
 
 
     # while not(player.in_treasure):
@@ -104,7 +122,7 @@ def start_game():
                         exit()
                 else:
                     print(f' You are now in {player.current_room.name}, {player.current_room.description}')
-
+                    grabdrop()
                     gamer_input
             except:
                 print("There is no room to the north")
@@ -113,7 +131,7 @@ def start_game():
             try:
                 player.current_room = player.current_room.s_to
                 print(f' You are now in {player.current_room.name}, {player.current_room.description}')
-                
+                grabdrop()
                 gamer_input                
             except:
                 print('There is no room to the south.')
@@ -122,7 +140,8 @@ def start_game():
             try:
                 player.current_room = player.current_room.e_to
                 print(f' You are now in {player.current_room.name}, {player.current_room.description}')
-                
+                grabdrop()
+
                 gamer_input                 
             except: 
                 print('There is no room to the east.')
@@ -131,7 +150,8 @@ def start_game():
             try:
                 player.current_room = player.current_room.w_to
                 print(f' You are now in {player.current_room.name}, {player.current_room.description}')
-                
+                grabdrop()
+
                 gamer_input
             except:
                 print('There is no room to the west.')
