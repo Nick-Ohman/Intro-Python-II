@@ -80,7 +80,7 @@ needhelp = ''' \n   How to play: \n\n, Type \'n\' to move north\n, Type \'s\' to
 
 
 def start_game():
-    player = Player(name = input('Enter name to start  '), current_room = room['outside'], items = [items["helmet"]])
+    player = Player(name = input('Enter name to start  '), current_room = room['outside'], items = [items["helmate"]])
     
     print(player)
 
